@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MarketController;
 
 Route::get('/', function () {
     return response()->json([
@@ -17,4 +18,9 @@ Route::group(['prefix' => 'auth'], function() {
         Route::get('logout',     [AuthController::class, 'logout']);
         Route::get('refresh',    [AuthController::class, 'refresh']);
         Route::get('me',         [AuthController::class, 'me']);
+});
+
+Route::group(['prefix' => 'market'], function() {
+    Route::post('create', [MarketController::class, 'create']);
+    Route::post('update', [MarketController::class, 'update']);
 });
