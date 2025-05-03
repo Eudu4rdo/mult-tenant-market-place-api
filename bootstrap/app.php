@@ -14,7 +14,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->appendToGroup('api', [
+            \eudu4rdo\laravelauditforge\Middlewares\RoutesAuditMiddleware::class,
+        ]);
+     
+        $middleware->prependToGroup('web', [
+            \eudu4rdo\laravelauditforge\Middlewares\RoutesAuditMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
