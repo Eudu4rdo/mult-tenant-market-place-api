@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Market extends Model
 {
@@ -17,5 +18,10 @@ class Market extends Model
     protected static function booted()
     {
         static::creating(fn(Market $market) => $market->id = (string) Uuid::uuid4());
+    }
+
+    public function owner(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'owner_id');
     }
 }

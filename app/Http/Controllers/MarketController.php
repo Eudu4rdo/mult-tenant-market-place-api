@@ -38,4 +38,14 @@ class MarketController extends Controller
 
         return response()->json(['message' => 'Market updated successfully'], 200);
     }
+
+    public function detail(Request $request)
+    {
+        $market = Market::with('owner')->find($request->input('id'));
+        if (!$market) {
+            return response()->json(['message' => 'Market not found'], 404);
+        }
+
+        return response()->json($market, 200);
+    }
 }

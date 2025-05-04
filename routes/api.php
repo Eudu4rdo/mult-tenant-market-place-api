@@ -13,14 +13,15 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'auth'], function() {
-        Route::post('login',     [AuthController::class, 'login'])->name('login');
-        Route::post('register',  [AuthController::class, 'register'])->name('register');
-        Route::get('logout',     [AuthController::class, 'logout']);
-        Route::get('refresh',    [AuthController::class, 'refresh']);
-        Route::get('me',         [AuthController::class, 'me']);
+    Route::post('login',     [AuthController::class, 'login'])->name('login');
+    Route::post('register',  [AuthController::class, 'register'])->name('register');
+    Route::get('logout',     [AuthController::class, 'logout'])->name('logout');
+    Route::get('refresh',    [AuthController::class, 'refresh'])->name('refresh');
+    Route::get('me',         [AuthController::class, 'me'])->name('me');
 });
 
 Route::group(['prefix' => 'market'], function() {
-    Route::post('create', [MarketController::class, 'create']);
-    Route::post('update', [MarketController::class, 'update']);
+    Route::post('create', [MarketController::class, 'create'])->name('market.create');
+    Route::post('update', [MarketController::class, 'update'])->name('market.update');
+    Route::get('detail',  [MarketController::class, 'detail'])->name('market.detail');
 });
